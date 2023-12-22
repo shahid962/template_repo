@@ -17,4 +17,12 @@ parameters:
 steps:
   - run:
       name: Run black command
-      command: black <<# parameters.verbose >>--verbose <</ parameters.verbose >><<# parameters.quiet >>--quiet <</ parameters.quiet >><< parameters.path >>
+      command: |
+              black
+              {% if parameters.verbose %}
+                --verbose
+              {% endif %}
+              {% if parameters.quiet %}
+                --quiet
+              {% endif %}
+              {{ parameters.path }}
