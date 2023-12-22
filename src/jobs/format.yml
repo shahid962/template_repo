@@ -18,7 +18,9 @@ parameters:
     description: Don't emit non-error messages to stderr. Errors are still emitted.
 steps:
   - checkout
-  - run: pip install black
+  - run: 
+      name: install black command
+      command: pip install black
   - format:
       path: << parameters.path >>
       verbose: << parameters.verbose >>

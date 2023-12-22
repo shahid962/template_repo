@@ -2,6 +2,7 @@ version: 2.1
 
 description: >
   fcheck private orbs for static-checks like flake8, black, mypy
+  sample description
 # What will your orb allow users to accomplish?
 # Descriptions should be short, simple, and informative.
 
