@@ -15,4 +15,6 @@ parameters:
     default: false
     description: Don't emit non-error messages to stderr. Errors are still emitted.
 steps:
-  - run: black <<# parameters.verbose >>--verbose <</ parameters.verbose >><<# parameters.quiet >>--quiet <</ parameters.quiet >><< parameters.path >>
+  - run:
+      name: Run black command
+      command: black <<# parameters.verbose >>--verbose <</ parameters.verbose >><<# parameters.quiet >>--quiet <</ parameters.quiet >><< parameters.path >>
