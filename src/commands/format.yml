@@ -16,13 +16,9 @@ parameters:
     description: Don't emit non-error messages to stderr. Errors are still emitted.
 steps:
   - run:
-      name: Run black command
-      command: |
-              black
-              {% if parameters.verbose %}
-                --verbose
-              {% endif %}
-              {% if parameters.quiet %}
-                --quiet
-              {% endif %}
-              {{ parameters.path }}
+      environment:
+        PARAM_PATH: <<parameters.path>>
+        PARAM_VERBOSE: <<parameters.verbose>>
+        PARAM_QUITE: <<parameters.quiet>>
+      name: Run Black with verbose <<parameters.verbose>>, quiet <<parameters.quiet>> and path <<parameters.path>>
+      command: <<include(scripts/format.sh)>>
