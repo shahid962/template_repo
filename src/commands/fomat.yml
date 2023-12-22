@@ -1,0 +1,18 @@
+description: >
+  Formatting files with Black
+
+parameters:
+  path:
+    type: string
+    default: "."
+    description: "Path to file[s]"
+  verbose:
+    type: boolean
+    default: false
+    description: Also emit messages to stderr about files that were not changed
+  quiet:
+    type: boolean
+    default: false
+    description: Don't emit non-error messages to stderr. Errors are still emitted.
+steps:
+  - run: black <<# parameters.verbose >>--verbose <</ parameters.verbose >><<# parameters.quiet >>--quiet <</ parameters.quiet >><< parameters.path >>

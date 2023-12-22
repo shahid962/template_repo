@@ -1,0 +1,25 @@
+description: >
+  Format python files
+
+executor: default
+
+parameters:
+  path:
+    type: string
+    default: "."
+    description: "Path to file[s]"
+  verbose:
+    type: boolean
+    default: false
+    description: Also emit messages to stderr about files that were not changed
+  quiet:
+    type: boolean
+    default: false
+    description: Don't emit non-error messages to stderr. Errors are still emitted.
+steps:
+  - checkout
+  - run: pip install black
+  - format:
+      path: << parameters.path >>
+      verbose: << parameters.verbose >>
+      quiet: << parameters.quiet >>
