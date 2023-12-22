@@ -5,6 +5,7 @@ orbs:
   orb-tools: circleci/orb-tools@12.0
   # The orb definition is intentionally not included here. It will be injected into the pipeline.
   ftest: jimicircleci/fcheck@dev:<<pipeline.git.revision>>
+  python: circleci/python@1.2.0
 
 # Use this tag to ensure test jobs always run,
 # even though the downstream publish job will only run on release tags.
@@ -23,8 +24,7 @@ jobs:
   # Create jobs to test the commands of your orbs.
   # You may want to add additional validation steps to ensure the commands are working as expected.
   command-test:
-    docker:
-      - image: cimg/base:current
+    executor: python/default
     steps:
       - checkout
       # Run your orb's commands to validate them.
