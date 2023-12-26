@@ -23,7 +23,7 @@ filters: &filters
 jobs:
   # Create jobs to test the commands of your orbs.
   # You may want to add additional validation steps to ensure the commands are working as expected.
-  command-black:
+  command-format:
     executor: python/default
     steps:
       - checkout
@@ -34,7 +34,7 @@ jobs:
           path: sample_files
           config: pyproject.toml
 
-  command-flake8:
+  command-lint:
     executor: python/default
     steps:
       - checkout
@@ -49,14 +49,14 @@ workflows:
     jobs:
       # Make sure to include "filters: *filters" in every test job you want to run as part of your deployment.
       # Test your orb's commands in a custom job and test your orb's jobs directly as a part of this workflow.
-      - command-black:
+      - command-format:
           filters: *filters
       - ftest/format:
           path: sample_files
           config: pyproject.toml
-      - command-flake8:
+      - command-lint:
           filters: *filters
-      - ftest/flake8:
+      - ftest/lint:
           path: sample_files
           config: .flake8  
       # The orb must be re-packed for publishing, and saved to the workspace.
@@ -69,10 +69,10 @@ workflows:
           # Ensure this job requires all test jobs and the pack job.
           requires:
             - orb-tools/pack
-            - command-black
+            - command-format
             - ftest/format
-            - command-flake8
-            - ftest/flake8
+            - command-lint
+            - ftest/lint
           context: orb-publishing
           filters:
             branches:
