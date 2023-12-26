@@ -55,7 +55,7 @@ workflows:
           config: pyproject.toml
       - command-flake8:
           filters: *filters
-      - ftest/lint:
+      - ftest/flake8:
           path: sample_files
           config: .flake8  
       # The orb must be re-packed for publishing, and saved to the workspace.
@@ -71,7 +71,7 @@ workflows:
             - command-black
             - ftest/black
             - command-flake8
-            - ftest/lint
+            - ftest/flake8
           context: orb-publishing
           filters:
             branches:
