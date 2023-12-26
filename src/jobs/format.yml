@@ -1,5 +1,5 @@
 description: >
-  Format python files
+  Format python files using black and isort
 
 executor: default
 
@@ -20,13 +20,21 @@ parameters:
     type: boolean
     default: false
     description: Don't emit non-error messages to stderr. Errors are still emitted.
+  profile:
+    type: string
+    default: "black"
+    description: "Profile to use with isort"
 steps:
   - checkout
   - run:
       name: install black command
       command: pip install black
+  - run:
+      name: install isort command
+      command: pip install isort
   - format:
       path: << parameters.path >>
       config: << parameters.config >>
       verbose: << parameters.verbose >>
       quiet: << parameters.quiet >>
+      profile: << parameters.profile >>

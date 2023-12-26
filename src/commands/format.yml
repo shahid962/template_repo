@@ -1,5 +1,5 @@
 description: >
-  Formatting files with Black
+  Formatting files with Black, iSort
 
 parameters:
   path:
@@ -18,6 +18,10 @@ parameters:
     type: boolean
     default: false
     description: Don't emit non-error messages to stderr. Errors are still emitted.
+  profile:
+    type: string
+    default: "black"
+    description: "Profile to use with isort"
 steps:
   - run:
       environment:
@@ -25,5 +29,6 @@ steps:
         PARAM_CONFIG: <<parameters.config>>
         PARAM_VERBOSE: <<parameters.verbose>>
         PARAM_QUITE: <<parameters.quiet>>
-      name: Run Black with <<parameters.config>> file in path <<parameters.path>>
+        PARAM_PROFILE: <<parameters.profile>>
+      name: Run black and isort
       command: <<include(scripts/format.sh)>>
