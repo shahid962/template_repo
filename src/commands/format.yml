@@ -6,6 +6,10 @@ parameters:
     type: string
     default: "."
     description: "Path to file[s]"
+  config:
+    type: string
+    default: "pyproject.toml"
+    description: "Path to configuration file"
   verbose:
     type: boolean
     default: false
@@ -18,7 +22,8 @@ steps:
   - run:
       environment:
         PARAM_PATH: <<parameters.path>>
+        PARAM_CONFIG: <<parameters.config>>
         PARAM_VERBOSE: <<parameters.verbose>>
         PARAM_QUITE: <<parameters.quiet>>
-      name: Run Black with verbose <<parameters.verbose>>, quiet <<parameters.quiet>> and path <<parameters.path>>
+      name: Run Black with <<parameters.config>> file in path <<parameters.path>>
       command: <<include(scripts/format.sh)>>
