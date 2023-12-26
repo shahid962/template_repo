@@ -17,6 +17,6 @@ steps:
   - run:
       name: install flake8 command
       command: pip install flake8
-  - format:
+  - lint:
       path: << parameters.path >>
       config: << parameters.config >>

@@ -39,7 +39,7 @@ jobs:
       - checkout
       # Run your orb's commands to validate them.
       - run: pip install flake8
-      - ftest/format:
+      - ftest/lint:
           path: sample_files
           config: .flake8
 
