@@ -1,0 +1,19 @@
+description: >
+  Check linting with flake8
+
+parameters:
+  path:
+    type: string
+    default: "."
+    description: "Path to file[s]"
+  config:
+    type: string
+    default: ".flake8"
+    description: "Path to configuration file"
+steps:
+  - run:
+      environment:
+        PARAM_PATH: <<parameters.path>>
+        PARAM_CONFIG: <<parameters.config>>
+      name: Run flake8 with <<parameters.config>> file in path <<parameters.path>>
+      command: <<include(scripts/lint.sh)>>

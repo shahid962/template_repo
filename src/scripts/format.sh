@@ -7,5 +7,5 @@ fi
 if [ "${PARAM_QUITE}" = "true" ]; then
     Q="--quiet"
 fi
-echo "Running black $V $Q --config ${PARAM_CONFIG} ""${PARAM_PATH}"" command"
+echo "Running command: black $V $Q --config ${PARAM_CONFIG} ""${PARAM_PATH}"""
 black $V $Q --config "${PARAM_CONFIG}" "${PARAM_PATH}"

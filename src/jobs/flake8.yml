@@ -1,0 +1,22 @@
+description: >
+  Linter for python files
+
+executor: default
+
+parameters:
+  path:
+    type: string
+    default: "."
+    description: "Path to file[s]"
+  config:
+    type: string
+    default: ".flake8"
+    description: "Path to configuration file"
+steps:
+  - checkout
+  - run:
+      name: install flake8 command
+      command: pip install flake8
+  - format:
+      path: << parameters.path >>
+      config: << parameters.config >>
