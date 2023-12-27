@@ -20,3 +20,7 @@ steps:
   - lint:
       path: << parameters.path >>
       config: << parameters.config >>
+  - persist_to_workspace:
+      root: << parameters.config >>
+      paths:
+        - generated-files/
