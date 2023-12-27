@@ -21,6 +21,6 @@ steps:
       path: << parameters.path >>
       config: << parameters.config >>
   - persist_to_workspace:
-      root: << parameters.config >>
+      root: /home/circleci/project
       paths:
-        - generated-files
+        - .flake8
