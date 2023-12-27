@@ -23,4 +23,4 @@ steps:
   - persist_to_workspace:
       root: << parameters.config >>
       paths:
-        - generated-files/
+        - generated-files
