@@ -1,0 +1,37 @@
+description: >
+  Static type checker for python files
+
+executor: default
+
+parameters:
+  path:
+    type: string
+    default: "."
+    description: "Path to file[s]"
+  config:
+    type: string
+    default: "mypy.ini"
+    description: "Path to configuration file"
+  requirement_file:
+    type: string
+    default: "requirements.txt"
+    description: "Path to your requirements file"
+  extra_packages_file:
+    type: string
+    default: "requirements-dev.txt"
+    description: "Path to your extra packages file"
+steps:
+  - checkout
+  - run:
+      name: install mypy command
+      command: pip install mypy
+  - run:
+      name: Install pip packages
+      command: |
+        pip install --upgrade pip
+        pip install -r << parameters.requirement_file >>
+        pip install -r << parameters.extra_packages_file >>
+  - mypy:
+      path: << parameters.path >>
+      config: << parameters.config >>
+

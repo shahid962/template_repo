@@ -54,11 +54,17 @@ workflows:
       - ftest/format:
           path: sample_files
           config: pyproject.toml
+          filters: *filters
       - command-lint:
           filters: *filters
       - ftest/lint:
           path: sample_files
-          config: .flake8  
+          config: .flake8
+          filters: *filters
+      - ftest/mypy:
+          extra_packages_file: requirements-dev.txt
+          config: mypy.ini
+          filters: *filters
       # The orb must be re-packed for publishing, and saved to the workspace.
       - orb-tools/pack:
           filters: *filters
@@ -73,6 +79,7 @@ workflows:
             - ftest/format
             - command-lint
             - ftest/lint
+            - ftest/mypy
           context: orb-publishing
           filters:
             branches:
