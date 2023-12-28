@@ -2,10 +2,10 @@
 V=""
 Q=""
 echo "Verbose is: ${PARAM_VERBOSE}"
-if ${PARAM_VERBOSE} ; then
+if [ "${PARAM_VERBOSE}" -eq 1 ] ; then
     V="--verbose"
 fi
-if ${PARAM_QUITE} ; then
+if [ "${PARAM_QUITE}" -eq 1 ] ; then
     Q="--quiet"
 fi
 echo "Running command: black $V $Q --check --config ${PARAM_CONFIG} ""${PARAM_PATH}"""
