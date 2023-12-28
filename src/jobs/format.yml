@@ -20,10 +20,10 @@ parameters:
     type: boolean
     default: false
     description: Don't emit non-error messages to stderr. Errors are still emitted.
-  profile:
-    type: string
-    default: "black"
-    description: "Profile to use with isort"
+  # profile:
+  #   type: string
+  #   default: "black"
+  #   description: "Profile to use with isort"
 steps:
   - checkout
   - run:
@@ -37,4 +37,4 @@ steps:
       config: << parameters.config >>
       verbose: << parameters.verbose >>
       quiet: << parameters.quiet >>
-      profile: << parameters.profile >>
+      # profile: << parameters.profile >>

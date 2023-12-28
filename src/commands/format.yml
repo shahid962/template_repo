@@ -18,10 +18,10 @@ parameters:
     type: boolean
     default: false
     description: Don't emit non-error messages to stderr. Errors are still emitted.
-  profile:
-    type: string
-    default: "black"
-    description: "Profile to use with isort"
+  # profile:
+  #   type: string
+  #   default: "black"
+  #   description: "Profile to use with isort"
 steps:
   - run:
       environment:
@@ -29,6 +29,6 @@ steps:
         PARAM_CONFIG: <<parameters.config>>
         PARAM_VERBOSE: <<parameters.verbose>>
         PARAM_QUITE: <<parameters.quiet>>
-        PARAM_PROFILE: <<parameters.profile>>
+        # PARAM_PROFILE: <<parameters.profile>>
       name: Run black and isort
       command: <<include(scripts/format.sh)>>
