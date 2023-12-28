@@ -33,6 +33,7 @@ jobs:
       - ftest/format:
           path: sample_files
           config: pyproject.toml
+          verbose: true
 
   command-lint:
     executor: python/default
