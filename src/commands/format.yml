@@ -28,7 +28,7 @@ steps:
         PARAM_PATH: <<parameters.path>>
         PARAM_CONFIG: <<parameters.config>>
         PARAM_VERBOSE: <<parameters.verbose>>
-        PARAM_QUITE: <<parameters.quiet>>
+        PARAM_QUIET: <<parameters.quiet>>
         # PARAM_PROFILE: <<parameters.profile>>
       name: Run black and isort
       command: <<include(scripts/format.sh)>>
