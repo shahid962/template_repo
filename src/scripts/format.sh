@@ -14,4 +14,4 @@ black $V $Q --config "${PARAM_CONFIG}" "${PARAM_PATH}"
 # Adding a blank line
 echo
 echo "Running command: isort --settings-path ${PARAM_CONFIG} ""${PARAM_PATH}"""
-isort --settings-path "${PARAM_CONFIG}" "${PARAM_PATH}"
+isort --check-only --settings-path "${PARAM_CONFIG}" "${PARAM_PATH}"
