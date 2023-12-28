@@ -1,6 +1,7 @@
 #!/bin/bash
 V=""
 Q=""
+echo "Verbose is: ${PARAM_VERBOSE}"
 if [ "${PARAM_VERBOSE}" = "true" ]; then
     V="--verbose"
 fi
