@@ -1,5 +1,8 @@
 #!/bin/bash
+
 echo "Installing pip packages..."
+# Adding a blank line
+echo
 pip install -r "${PARAM_REQUIREMENT_FILE}"
 pip install -r "${PARAM_EXTRA_PACKAGES_FILE}"
 

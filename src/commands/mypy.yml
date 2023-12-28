@@ -16,7 +16,7 @@ parameters:
     description: "Path to your requirements file"
   extra_packages_file:
     type: string
-    default: "requirements-dev.txt"
+    default: ""
     description: "Path to your extra packages file"
 steps:
   - run:
