@@ -10,10 +10,20 @@ parameters:
     type: string
     default: "mypy.ini"
     description: "Path to configuration file"
+  requirement_file:
+    type: string
+    default: "requirements.txt"
+    description: "Path to your requirements file"
+  extra_packages_file:
+    type: string
+    default: "requirements-dev.txt"
+    description: "Path to your extra packages file"
 steps:
   - run:
       environment:
         PARAM_PATH: <<parameters.path>>
         PARAM_CONFIG: <<parameters.config>>
+        PARAM_REQUIREMENT_FILE: << parameters.requirement_file >>
+        PARAM_EXTRA_PACKAGES_FILE: << parameters.extra_packages_file >>
       name: Run mypy with <<parameters.config>> file in path <<parameters.path>>
       command: <<include(scripts/run_mypy.sh)>>

@@ -25,13 +25,9 @@ steps:
   - run:
       name: install mypy command
       command: pip install mypy
-  - run:
-      name: Install pip packages
-      command: |
-        pip install --upgrade pip
-        pip install -r << parameters.requirement_file >>
-        pip install -r << parameters.extra_packages_file >>
   - mypy:
       path: << parameters.path >>
       config: << parameters.config >>
+      requirement_file: << parameters.requirement_file >>
+      extra_packages_file: << parameters.extra_packages_file >>
 
