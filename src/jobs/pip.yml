@@ -1,0 +1,20 @@
+description: >
+  Setup pip.conf file
+
+executor: default
+
+parameters:
+  username:
+    type: string
+    default: "username"
+    description: "Username for jfrog artifactory"
+  password:
+    type: string
+    default: "password"
+    description: "Password for jfrog artifactory"
+steps:
+  - checkout
+  - pip:
+      username: << parameters.username >>
+      password: << parameters.password >>
+

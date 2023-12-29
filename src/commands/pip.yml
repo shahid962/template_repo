@@ -1,0 +1,19 @@
+description: >
+  Setup pip.conf file
+
+parameters:
+  username:
+    type: string
+    default: "username"
+    description: "Username for jfrog artifactory"
+  password:
+    type: string
+    default: "password"
+    description: "Password for jfrog artifactory"
+steps:
+  - run:
+      environment:
+        PARAM_USERNAME: <<parameters.username>>
+        PARAM_PASSWORD: <<parameters.password>>
+      name: Create custom pip.conf file
+      command: <<include(scripts/pip.sh)>>
