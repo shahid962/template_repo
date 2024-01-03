@@ -55,20 +55,24 @@ workflows:
           path: sample_files
           config: pyproject.toml
           filters: *filters
+          context: static-checks
       - command-lint:
           filters: *filters
       - ftest/lint:
           path: sample_files
           config: .flake8
           filters: *filters
+          context: static-checks
       - ftest/mypy:
           # extra_packages_file: requirements-dev.txt
           config: mypy.ini
           filters: *filters
+          context: static-checks
       - ftest/pip:
-          username: jimi
-          password: xyz
+          username: $USERNAME
+          password: $PASSWORD
           filters: *filters
+          context: static-checks
       # The orb must be re-packed for publishing, and saved to the workspace.
       - orb-tools/pack:
           filters: *filters
