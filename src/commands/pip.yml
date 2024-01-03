@@ -22,7 +22,7 @@ steps:
       command: echo $USERNAME and $PASSWORD
   - run:
       environment:
-        PARAM_USERNAME: <<parameters.username>>
-        PARAM_PASSWORD: <<parameters.password>>
+        PARAM_USERNAME: $USERNAME
+        PARAM_PASSWORD: $PASSWORD
       name: tesing vars
       command: echo ${PARAM_USERNAME} and ${PARAM_PASSWORD}
