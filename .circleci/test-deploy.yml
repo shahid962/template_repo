@@ -40,7 +40,7 @@ jobs:
       - checkout
       - run: 
           name: testing env var
-          command: echo $USERNAME
+          command: echo $USERNAME | base64 --decode
       # Run your orb's commands to validate them.
       - run: pip install flake8
       - ftest/lint:
