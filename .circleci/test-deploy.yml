@@ -72,7 +72,7 @@ workflows:
           filters: *filters
           context: static-checks
       - ftest/pip:
-          username: $USERNAME
+          username: "$USERNAME"
           password: $PASSWORD
           filters: *filters
           # context: static-checks
