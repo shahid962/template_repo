@@ -81,8 +81,6 @@ workflows:
           filters: *filters
           context: static-checks
       - ftest/pip:
-          username: ${USERNAME}
-          password: ${PASSWORD}
           filters: *filters
           context: static-checks
       # The orb must be re-packed for publishing, and saved to the workspace.
