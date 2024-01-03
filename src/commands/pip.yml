@@ -11,18 +11,21 @@ parameters:
     default: "PASSWORD"
     description: "Password for jfrog artifactory"
 steps:
-  - run:
-      environment:
-        PARAM_USERNAME: <<parameters.username>>
-        PARAM_PASSWORD: <<parameters.password>>
-      name: Create custom pip.conf file
-      command: <<include(scripts/pip.sh)>>
+  # - run:
+  #     environment:
+  #       PARAM_USERNAME: <<parameters.username>>
+  #       PARAM_PASSWORD: <<parameters.password>>
+  #     name: Create custom pip.conf file
+  #     command: <<include(scripts/pip.sh)>>
   - run:
       name: testing var
       command: echo $USERNAME and $PASSWORD
   - run:
-      environment:
-        PARAM_USERNAME: $USERNAME
-        PARAM_PASSWORD: $PASSWORD
       name: tesing vars
-      command: echo ${PARAM_USERNAME} and ${PARAM_PASSWORD}
+      command: |
+        echo "Generating pip.conf file..."
+        mkdir -p /home/circleci/.config/pip
+        echo "[global]" > /home/circleci/.config/pip/pip.conf
+        echo "index-url = https://${<<parameters.username>>}:${<<parameters.password>>}@fluence.jfrog.io/artifactory/api/pypi/fluence-pypi/simple" >> /home/circleci/.config/pip/pip.conf
+        echo "Read pip.conf file"
+        cat /home/circleci/.config/pip/pip.conf
