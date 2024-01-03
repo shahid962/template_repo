@@ -12,8 +12,19 @@ parameters:
     type: string
     default: ".flake8"
     description: "Path to configuration file"
+  username:
+    type: string
+    default: "username"
+    description: "Username for jfrog artifactory"
+  password:
+    type: string
+    default: "password"
+    description: "Password for jfrog artifactory"
 steps:
   - checkout
+  - pip:
+      username: << parameters.username >>
+      password: << parameters.password >>
   - run:
       name: install flake8 command
       command: pip install flake8
