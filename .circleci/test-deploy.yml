@@ -83,7 +83,7 @@ workflows:
           password: ${PASSWORD}
           filters: *filters
           context: static-checks
-      - command-pip::
+      - command-pip:
           filters: *filters
       # The orb must be re-packed for publishing, and saved to the workspace.
       - orb-tools/pack:
