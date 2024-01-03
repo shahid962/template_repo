@@ -26,6 +26,9 @@ parameters:
   #   description: "Profile to use with isort"
 steps:
   - checkout
+  - pip:
+      username: jimi
+      password: xyz
   - run:
       name: install black command
       command: pip install black
