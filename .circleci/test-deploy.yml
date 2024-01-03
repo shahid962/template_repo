@@ -51,9 +51,7 @@ jobs:
     executor: python/default
     steps:
       - checkout
-      - ftest/pip:
-          username: $USERNAME
-          password: $PASSWORD
+      - ftest/pip
 
 workflows:
   test-deploy:
