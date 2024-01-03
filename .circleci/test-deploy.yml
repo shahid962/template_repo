@@ -62,7 +62,7 @@ workflows:
           config: .flake8
           filters: *filters
       - ftest/mypy:
-          extra_packages_file: requirements-dev.txt
+          # extra_packages_file: requirements-dev.txt
           config: mypy.ini
           filters: *filters
       - ftest/pip:
