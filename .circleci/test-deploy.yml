@@ -47,6 +47,14 @@ jobs:
           path: sample_files
           config: .flake8
 
+  command-pip:
+    executor: python/default
+    steps:
+      - checkout
+      - ftest/pip:
+          username: $USERNAME
+          password: $PASSWORD
+
 workflows:
   test-deploy:
     jobs:
@@ -54,6 +62,9 @@ workflows:
       # Test your orb's commands in a custom job and test your orb's jobs directly as a part of this workflow.
       - command-format:
           filters: *filters
+      - command-pip:
+          filters: *filters
+          context: static-checks
       - ftest/format:
           path: sample_files
           config: pyproject.toml
