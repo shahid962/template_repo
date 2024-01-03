@@ -60,6 +60,7 @@ workflows:
       # Test your orb's commands in a custom job and test your orb's jobs directly as a part of this workflow.
       - command-format:
           filters: *filters
+          context: static-checks
       - command-pip:
           filters: *filters
           context: static-checks
@@ -70,6 +71,7 @@ workflows:
           context: static-checks
       - command-lint:
           filters: *filters
+          context: static-checks
       - ftest/lint:
           path: sample_files
           config: .flake8
@@ -94,10 +96,12 @@ workflows:
           requires:
             - orb-tools/pack
             - command-format
-            - ftest/format
+            - command-pip
             - command-lint
+            - ftest/format
             - ftest/lint
             - ftest/mypy
+            - ftest/pip
           context: orb-publishing
           filters:
             branches:

@@ -25,12 +25,12 @@ parameters:
   #   default: "black"
   #   description: "Profile to use with isort"
   username:
-    type: string
-    default: "username"
+    type: env_var_name
+    default: "USERNAME"
     description: "Username for jfrog artifactory"
   password:
-    type: string
-    default: "password"
+    type: env_var_name
+    default: "PASSWORD"
     description: "Password for jfrog artifactory"
 steps:
   - checkout

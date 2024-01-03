@@ -17,11 +17,11 @@ steps:
   #       PARAM_PASSWORD: <<parameters.password>>
   #     name: Create custom pip.conf file
   #     command: <<include(scripts/pip.sh)>>
+  # - run:
+  #     name: testing var
+  #     command: echo $USERNAME and $PASSWORD
   - run:
-      name: testing var
-      command: echo $USERNAME and $PASSWORD
-  - run:
-      name: tesing vars
+      name: Create custom pip.conf file
       command: |
         echo "Generating pip.conf file..."
         mkdir -p /home/circleci/.config/pip
