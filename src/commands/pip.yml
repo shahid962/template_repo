@@ -20,3 +20,9 @@ steps:
   - run:
       name: testing var
       command: echo $USERNAME and $PASSWORD
+  - run:
+      environment:
+        PARAM_USERNAME: <<parameters.username>>
+        PARAM_PASSWORD: <<parameters.password>>
+      name: tesing vars
+      command: echo ${PARAM_USERNAME} and ${PARAM_PASSWORD}
