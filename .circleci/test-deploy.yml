@@ -72,7 +72,7 @@ workflows:
           username: $USERNAME
           password: $PASSWORD
           filters: *filters
-          context: static-checks
+          # context: static-checks
       # The orb must be re-packed for publishing, and saved to the workspace.
       - orb-tools/pack:
           filters: *filters
