@@ -47,6 +47,13 @@ jobs:
           path: sample_files
           config: .flake8
 
+  command-pip:
+    executor: python/default
+    steps:
+      - checkout
+      - ftest/pip:
+          username: $USERNAME
+
 workflows:
   test-deploy:
     jobs:
@@ -73,9 +80,11 @@ workflows:
           context: static-checks
       - ftest/pip:
           username: ${USERNAME}
-          password: $PASSWORD
+          password: ${PASSWORD}
           filters: *filters
-          # context: static-checks
+          context: static-checks
+      - command-pip::
+          filters: *filters
       # The orb must be re-packed for publishing, and saved to the workspace.
       - orb-tools/pack:
           filters: *filters
