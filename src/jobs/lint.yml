@@ -22,7 +22,7 @@ parameters:
     description: "Password for jfrog artifactory"
   target_dir:
     type: string
-    default: "."
+    default: "sample_files"
     description: "Target directory where you want to copy .flake8 file"
 steps:
   - checkout
