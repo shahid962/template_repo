@@ -37,7 +37,7 @@ steps:
       command: ls -al
   - run:
       name: copy file
-      command: cp .flake8 ${<< parameters.path >>}
+      command: cp .flake8 << parameters.target_dir >>
   - lint:
       path: << parameters.path >>
       config: << parameters.config >>
