@@ -20,10 +20,10 @@ parameters:
     type: env_var_name
     default: "PASSWORD"
     description: "Password for jfrog artifactory"
-  target_dir:
-    type: string
-    default: "sample_files"
-    description: "Target directory where you want to copy .flake8 file"
+  # target_dir:
+  #   type: string
+  #   default: "sample_files"
+  #   description: "Target directory where you want to copy .flake8 file"
 steps:
   - checkout
   - pip:
@@ -32,12 +32,12 @@ steps:
   - run:
       name: install flake8 command
       command: pip install flake8
-  - run:
-      name: list down the dir
-      command: ls -al
-  - run:
-      name: copy file
-      command: cp .flake8 << parameters.target_dir >>
+  # - run:
+  #     name: list down the dir
+  #     command: ls -al
+  # - run:
+  #     name: copy file
+  #     command: cp .flake8 << parameters.target_dir >>
   - lint:
       path: << parameters.path >>
       config: << parameters.config >>
