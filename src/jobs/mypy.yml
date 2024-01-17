@@ -35,7 +35,7 @@ steps:
       password: << parameters.password >>
   - run:
       name: install mypy command
-      command: pip install mypy
+      command: pip install mypy==0.930
   - mypy:
       path: << parameters.path >>
       config: << parameters.config >>

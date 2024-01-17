@@ -28,8 +28,8 @@ jobs:
     steps:
       - checkout
       # Run your orb's commands to validate them.
-      - run: pip install black
-      - run: pip install isort
+      - run: pip install black==22.3.0
+      - run: pip install isort==5.12.0
       - ftest/format:
           path: sample_files
           config: pyproject.toml
@@ -42,7 +42,7 @@ jobs:
           name: testing env var
           command: echo $USERNAME; printenv
       # Run your orb's commands to validate them.
-      - run: pip install flake8
+      - run: pip install flake8==3.9
       - ftest/lint:
           path: sample_files
           config: .flake8

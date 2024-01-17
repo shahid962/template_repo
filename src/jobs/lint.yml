@@ -31,7 +31,7 @@ steps:
       password: << parameters.password >>
   - run:
       name: install flake8 command
-      command: pip install flake8
+      command: pip install flake8==3.9
   # - run:
   #     name: list down the dir
   #     command: ls -al
