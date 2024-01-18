@@ -1,0 +1,110 @@
+version: 2.1
+orbs:
+  # Your orb will be automatically injected here during the pipeline.
+  # Reference your orb's jobs and commands below as they will exist when built.
+  orb-tools: circleci/orb-tools@12.0
+  # The orb definition is intentionally not included here. It will be injected into the pipeline.
+  ftest: jimicircleci/fcheck@dev:<<pipeline.git.revision>>
+  python: circleci/python@1.2.0
+
+# Use this tag to ensure test jobs always run,
+# even though the downstream publish job will only run on release tags.
+filters: &filters
+  tags:
+    only: /.*/
+
+# # Filter for release tags.
+# release-filters: &release-filters
+#   branches:
+#     ignore: /.*/
+#   tags:
+#     only: /^v[0-9]+\.[0-9]+\.[0-9]+$/
+
+jobs:
+  # Create jobs to test the commands of your orbs.
+  # You may want to add additional validation steps to ensure the commands are working as expected.
+  command-format:
+    executor: python/default
+    steps:
+      - checkout
+      # Run your orb's commands to validate them.
+      - run: pip install black==22.3.0
+      - run: pip install isort==5.12.0
+      - ftest/format:
+          path: sample_files
+          config: pyproject.toml
+
+  command-lint:
+    executor: python/default
+    steps:
+      - checkout
+      - run: 
+          name: testing env var
+          command: echo $USERNAME; printenv
+      # Run your orb's commands to validate them.
+      - run: pip install flake8==3.9
+      - ftest/lint:
+          path: sample_files
+          config: .flake8
+
+  command-pip:
+    executor: python/default
+    steps:
+      - checkout
+      - ftest/pip
+
+workflows:
+  test-deploy:
+    jobs:
+      # Make sure to include "filters: *filters" in every test job you want to run as part of your deployment.
+      # Test your orb's commands in a custom job and test your orb's jobs directly as a part of this workflow.
+      - command-format:
+          filters: *filters
+          context: static-checks
+      - command-pip:
+          filters: *filters
+          context: static-checks
+      - ftest/format:
+          path: sample_files
+          config: pyproject.toml
+          filters: *filters
+          context: static-checks
+      - command-lint:
+          filters: *filters
+          context: static-checks
+      - ftest/lint:
+          path: sample_files
+          config: .flake8
+          filters: *filters
+          context: static-checks
+      - ftest/mypy:
+          # extra_packages_file: requirements-dev.txt
+          config: mypy.ini
+          filters: *filters
+          context: static-checks
+      - ftest/pip:
+          filters: *filters
+          context: static-checks
+      # The orb must be re-packed for publishing, and saved to the workspace.
+      - orb-tools/pack:
+          filters: *filters
+      - orb-tools/publish:
+          orb_name: jimicircleci/fcheck
+          vcs_type: << pipeline.project.type >>
+          pub_type: production
+          # Ensure this job requires all test jobs and the pack job.
+          requires:
+            - orb-tools/pack
+            - command-format
+            - command-pip
+            - command-lint
+            - ftest/format
+            - ftest/lint
+            - ftest/mypy
+            - ftest/pip
+          context: orb-publishing
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v[0-9]+\.[0-9]+\.[0-9]+$/
